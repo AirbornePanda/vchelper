@@ -1,0 +1,16 @@
+package de.jsauer.spring.backend.repositories;
+
+import de.jsauer.spring.backend.entities.Hero;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface HeroRepository extends JpaRepository<Hero, Long> {
+
+    Hero findOneByGarmId(String garmId);
+
+    List<Hero> findAllByNameIgnoreCaseContaining(String name, Pageable pageable);
+
+    long countByNameIgnoreCaseContaining(String name);
+}
