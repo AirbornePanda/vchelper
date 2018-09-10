@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.backend.entities.Hero;
 import de.jsauer.spring.backend.repositories.HeroRepository;
@@ -127,7 +128,7 @@ public class HeroDetailView extends DetailPage<Hero> {
         generateAndBindReadOnly(hero -> skillNameWrapper.setComponent(new Label(hero.getSkillName())));
         generateAndBindReadOnly(hero -> skillDescriptionWrapper.setComponent(new Label(hero.getSkillDescription())));
         generateAndBindReadOnly(hero -> skillElementWrapper.setComponent(new Label(hero.getSkillElement().getName())));
-        generateAndBindReadOnly(hero -> limitBurstNameWrapper.setComponent(new Label(hero.getLimitBurst().getName())));
+        generateAndBindReadOnly(hero -> limitBurstNameWrapper.setComponent(new RouterLink(hero.getLimitBurst().getName(), LimitBurstDetailView.class, hero.getLimitBurst().getId())));
         generateAndBindReadOnly(hero -> limitBurstDescriptionWrapper.setComponent(new Label(hero.getLimitBurst().getDescription())));
     }
 }

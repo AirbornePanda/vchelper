@@ -119,7 +119,6 @@ public class GarmGrabber {
 
                 grabHeroDetails(hero);
 
-                log.info(hero.getSkillDescription());
                 //Save the hero
                 heroRepository.save(hero);
             }

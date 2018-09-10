@@ -6,6 +6,9 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
@@ -85,7 +88,6 @@ public class MainView extends VerticalLayout {
 
         heroNameFilter.setPlaceholder("Name...");
 
-
         //Column for hero image
         heroGrid.addComponentColumn(hero -> {
             if (hero.getImage() != null) {
@@ -106,8 +108,9 @@ public class MainView extends VerticalLayout {
                 return new Label("No name found");
             }
         }).setSortProperty("name").setHeader(heroNameFilter);
-        heroGrid.addColumn(hero -> hero.getInitialRarity() == null ? "No rarity found!" : hero.getInitialRarity()).setSortProperty("initialRarity").setHeader("Initial rarity");
+        heroGrid.addComponentColumn(hero -> hero.getInitialRarity() == null ? new Label("No rarity found!") : generateRarity(hero)).setSortProperty("initialRarity").setHeader("Initial rarity");
         heroGrid.addColumn(hero -> hero.getDamageType() == null ? "No damage type found!" : hero.getDamageType().getNameShort()).setSortProperty("damageType").setHeader("Attack Type");
+        heroGrid.addComponentColumn(hero -> hero.getLimitBurst() == null ? new Label("No limit break found!") : new RouterLink(hero.getLimitBurst().getName(), LimitBurstDetailView.class, hero.getLimitBurst().getId())).setHeader("Limit Break").setSortProperty("limitBurst");
         heroGrid.addColumn(hero -> hero.getGender() == null ? "No gender defined!" : hero.getGender().getName()).setSortProperty("gender").setHeader("Gender");
         heroGrid.setMultiSort(true);
 
@@ -128,7 +131,7 @@ public class MainView extends VerticalLayout {
     }
 
     public static Pair<Integer, Integer> limitAndOffsetToPageSizeAndNumber(
-            int offset, int limit) {
+            final int offset, final int limit) {
         int minPageSize = limit;
         int lastIndex = offset + limit - 1;
         int maxPageSize = lastIndex + 1;
@@ -145,5 +148,27 @@ public class MainView extends VerticalLayout {
 
         // Should not really get here
         return Pair.of(maxPageSize, 0);
+    }
+
+    /**
+     * Generates stars displayed for the {@link Hero#initialRarity}.
+     * @param hero a {@link Hero}
+     * @return a {@link HorizontalLayout} containing stars and the number.
+     */
+    private HorizontalLayout generateRarity(final Hero hero) {
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+
+        if(hero.getInitialRarity() != null && hero.getInitialRarity() > 0) {
+            for (int i = 0; i < hero.getInitialRarity(); i++) {
+                Icon starIcon = VaadinIcon.STAR.create();
+                starIcon.setColor("Yellow");
+                horizontalLayout.add(starIcon);
+            }
+            horizontalLayout.add(new Label("(" + hero.getInitialRarity() + ")"));
+        } else {
+            horizontalLayout.add(new Label("(0)"));
+        }
+
+        return horizontalLayout;
     }
 }
