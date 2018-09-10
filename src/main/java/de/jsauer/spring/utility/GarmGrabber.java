@@ -19,7 +19,6 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.ElementCollection;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -299,19 +298,19 @@ public class GarmGrabber {
         if (fieldResistanceElement != null) {
             switch (fieldResistanceElement.text()){
                 case "Gravity Field":
-                    hero.setFieldResistence(EFieldEffect.GRAVITY);
+                    hero.setFieldResistance(EFieldEffect.GRAVITY);
                     break;
                 case "Eclipse Field":
-                    hero.setFieldResistence(EFieldEffect.ECLIPSE);
+                    hero.setFieldResistance(EFieldEffect.ECLIPSE);
                     break;
                 case "Mist Field":
-                    hero.setFieldResistence(EFieldEffect.MIST);
+                    hero.setFieldResistance(EFieldEffect.MIST);
                     break;
                 case "Void Field":
-                    hero.setFieldResistence(EFieldEffect.VOID);
+                    hero.setFieldResistance(EFieldEffect.VOID);
                     break;
                 default:
-                    hero.setFieldResistence(EFieldEffect.UNKNOWN);
+                    hero.setFieldResistance(EFieldEffect.UNKNOWN);
                     break;
             }
         }

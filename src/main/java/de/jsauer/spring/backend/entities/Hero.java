@@ -44,7 +44,7 @@ public class Hero {
 
     private EDamageType damageType;
 
-    private EFieldEffect fieldResistence;
+    private EFieldEffect fieldResistance;
 
     private EElement skillElement;
 
@@ -149,12 +149,12 @@ public class Hero {
         this.damageType = damageType;
     }
 
-    public EFieldEffect getFieldResistence() {
-        return fieldResistence;
+    public EFieldEffect getFieldResistance() {
+        return fieldResistance;
     }
 
-    public void setFieldResistence(EFieldEffect fieldResistence) {
-        this.fieldResistence = fieldResistence;
+    public void setFieldResistance(EFieldEffect fieldResistance) {
+        this.fieldResistance = fieldResistance;
     }
 
     public EElement getSkillElement() {
