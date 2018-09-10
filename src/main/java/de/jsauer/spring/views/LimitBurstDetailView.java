@@ -16,6 +16,7 @@ import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.backend.entities.Hero;
 import de.jsauer.spring.backend.entities.LimitBurst;
 import de.jsauer.spring.backend.repositories.LimitBurstRepository;
+import de.jsauer.spring.components.InformationLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
@@ -75,10 +76,11 @@ public class LimitBurstDetailView extends DetailPage<LimitBurst> {
 
     private void addRelatedHeroes() {
         for (Hero hero: getBinder().getBean().getHeroes()) {
-            Div layout = new Div();
+            FlexLayout layout = new FlexLayout();
             layout.getStyle().set("flex-direction", "column");
-            layout.getStyle().set("margin-right", "40px");
+            layout.getStyle().set("margin-right", "30px");
             layout.setWidth("75px");
+            layout.setAlignItems(Alignment.CENTER);
             Image image = new Image();
             image.setSrc(new StreamResource("", () -> new ByteArrayInputStream(hero.getImage())));
             image.setHeight("75px");
