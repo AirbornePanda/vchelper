@@ -45,7 +45,7 @@ public class HeroDetailView extends DetailPage<Hero> {
     private final InformationWrapper skillNameWrapper = new InformationWrapper("Skill Name", null);
     private final InformationWrapper skillDescriptionWrapper = new InformationWrapper("Skill Description", null);
     private final InformationWrapper skillElementWrapper = new InformationWrapper("Skill Element", null);
-    private final H2 limitBurstInformationHeading = new H2("Limit Burst");
+    private final H2 limitBurstInformationHeading = new H2("Limit Break");
     private final InformationWrapper limitBurstNameWrapper = new InformationWrapper("Name", null);
     private final InformationWrapper limitBurstDescriptionWrapper = new InformationWrapper("Description", null);
 

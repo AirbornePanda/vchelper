@@ -77,7 +77,7 @@ public class LimitBurstDetailView extends DetailPage<LimitBurst> {
         for (Hero hero: getBinder().getBean().getHeroes()) {
             Div layout = new Div();
             layout.getStyle().set("flex-direction", "column");
-            layout.getStyle().set("margin-right", "30px");
+            layout.getStyle().set("margin-right", "40px");
             layout.setWidth("75px");
             Image image = new Image();
             image.setSrc(new StreamResource("", () -> new ByteArrayInputStream(hero.getImage())));
