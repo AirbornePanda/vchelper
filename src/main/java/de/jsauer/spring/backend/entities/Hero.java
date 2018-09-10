@@ -8,27 +8,23 @@ import de.jsauer.spring.backend.enums.ERace;
 import de.jsauer.spring.backend.enums.ETrait;
 import de.jsauer.spring.backend.enums.EType;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Hero {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Hero extends de.jsauer.spring.backend.entities.Entity {
 
     private String garmId;
 
     private String name;
 
+    @Column(length = 500)
     private String bio;
 
     private Integer initialRarity;
@@ -48,15 +44,19 @@ public class Hero {
 
     private EElement skillElement;
 
+    private String skillName;
+
+    @Column(length = 500)
+    private String skillDescription;
+
+    @ManyToOne
+    private LimitBurst limitBurst;
+
     @Lob
     private byte[] image;
 
     public Hero() {
 
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getGarmId() {
@@ -163,5 +163,33 @@ public class Hero {
 
     public void setSkillElement(EElement skillElement) {
         this.skillElement = skillElement;
+    }
+
+    public String getSkillName() {
+        return skillName;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    public String getSkillDescription() {
+        return skillDescription;
+    }
+
+    public void setSkillDescription(String skillDescription) {
+        this.skillDescription = skillDescription;
+    }
+
+    public LimitBurst getLimitBurst() {
+        return limitBurst;
+    }
+
+    public void setLimitBurst(LimitBurst limitBurst) {
+        if (this.limitBurst != null && this.limitBurst != limitBurst) {
+            this.limitBurst.remove(this);
+            limitBurst.addHero(this);
+        }
+        this.limitBurst = limitBurst;
     }
 }

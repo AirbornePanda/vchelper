@@ -3,6 +3,7 @@ package de.jsauer.spring.utility;
 import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
 import de.jsauer.spring.backend.entities.Hero;
+import de.jsauer.spring.backend.entities.LimitBurst;
 import de.jsauer.spring.backend.enums.EDamageType;
 import de.jsauer.spring.backend.enums.EElement;
 import de.jsauer.spring.backend.enums.EFieldEffect;
@@ -11,6 +12,7 @@ import de.jsauer.spring.backend.enums.ERace;
 import de.jsauer.spring.backend.enums.ETrait;
 import de.jsauer.spring.backend.enums.EType;
 import de.jsauer.spring.backend.repositories.HeroRepository;
+import de.jsauer.spring.backend.repositories.LimitBurstRepository;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,11 +40,14 @@ public class GarmGrabber {
      * Link to the site containing basic {@link Hero} information.
      */
     private static String HERO_PAGE = "https://garm.ml/hero/all";
-
     /**
      * Link to the hero detail pages.
      */
     private static String HERO_DETAIL_PAGE = "https://garm.ml/hero/";
+    /**
+     * Link to details of a {@link LimitBurst}.
+     */
+    private static String LIMITBURST_PAGE = "https://garm.ml/limit-burst/";
     /**
      * Link to the hero portraits.
      */
@@ -58,6 +63,9 @@ public class GarmGrabber {
 
     @Autowired
     private HeroRepository heroRepository;
+
+    @Autowired
+    private LimitBurstRepository limitBurstRepository;
 
     /**
      * Grabs basic hero information
@@ -111,6 +119,7 @@ public class GarmGrabber {
 
                 grabHeroDetails(hero);
 
+                log.info(hero.getSkillDescription());
                 //Save the hero
                 heroRepository.save(hero);
             }
@@ -347,6 +356,68 @@ public class GarmGrabber {
                     hero.setSkillElement(EElement.NEUTRAL);
                     break;
             }
+        }
+
+        //The name of the heroes action skill
+        Element skillNameElement = heroDetailSite.selectFirst("section.pane-node-field-action-skill > div > div > div > div > div");
+        if(skillNameElement != null) {
+            hero.setSkillName(skillNameElement.text());
+        }
+
+        //The description of the heroes action skill
+        Element skillDescriptionElement = heroDetailSite.selectFirst("div.field-name-field-action-skill-effect > div > div");
+        if(skillDescriptionElement != null) {
+            hero.setSkillDescription(skillDescriptionElement.text());
+        }
+
+        Element limitBurstElement = heroDetailSite.selectFirst("div.field-name-field-limit-burst > ul > li > article > h2 > a");
+        if (limitBurstElement != null) {
+            String limitBurstGarmId = limitBurstElement.attr("href").substring(13);
+            if (limitBurstGarmId != null && !limitBurstGarmId.equals(""))  {
+                LimitBurst limitBurst = fetchLimitBurst(limitBurstGarmId);
+                if (limitBurst != null) {
+                    hero.setLimitBurst(limitBurst);
+                    limitBurstRepository.save(limitBurst);
+                }
+            }
+        }
+    }
+
+    private LimitBurst fetchLimitBurst(final String garmID){
+        LimitBurst limitBurst = limitBurstRepository.findOneByGarmId(garmID);
+
+        Document limitBurstSite;
+
+        try {
+            limitBurstSite = Jsoup.connect(LIMITBURST_PAGE + garmID).get();
+        } catch (IOException e) {
+            log.error("Could not connect to hero page " + LIMITBURST_PAGE + garmID + ". Aborting import!");
+            return null;
+        }
+
+        if(limitBurstSite != null) {
+            if (limitBurst == null) {
+                limitBurst = new LimitBurst();
+                limitBurst.setGarmId(garmID);
+            }
+
+            //Name of the limitBurst
+            Element limitBurstNameElement = limitBurstSite.selectFirst("h1#page-title");
+            if (limitBurstNameElement != null) {
+                limitBurst.setName(limitBurstNameElement.text());
+            }
+
+            //Description of the limitBurst
+            Element limitBurstDescriptionElement = limitBurstSite.selectFirst("div.taxonomy-term-description > p");
+            if (limitBurstDescriptionElement != null) {
+                limitBurst.setDescription(limitBurstDescriptionElement.text());
+            }
+
+            limitBurstRepository.save(limitBurst);
+
+            return limitBurst;
+        } else {
+            return null;
         }
     }
 
