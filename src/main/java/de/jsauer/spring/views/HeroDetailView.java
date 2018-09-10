@@ -16,6 +16,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.backend.entities.Hero;
 import de.jsauer.spring.backend.repositories.HeroRepository;
+import de.jsauer.spring.components.InformationLayout;
 import de.jsauer.spring.components.InformationWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,10 +29,10 @@ public class HeroDetailView extends DetailPage<Hero> {
 
     private final VerticalLayout masterLayout = new VerticalLayout();
     private final HorizontalLayout headerLayout = new HorizontalLayout();
-    private final FlexLayout primaryInformationLayout = new FlexLayout();
-    private final VerticalLayout basicInformationLayout = new VerticalLayout();
-    private final VerticalLayout skillInformationLayout = new VerticalLayout();
-
+    private final FlexLayout informationContainerLayout = new FlexLayout();
+    private final FlexLayout basicInformationLayout = new InformationLayout();
+    private final FlexLayout skillInformationLayout = new InformationLayout();
+    private final FlexLayout limitBurstLayout = new InformationLayout();
 
     private final H1 pageHeading = new H1("Hero Name");
     private final H4 descriptionHeading = new H4("Hero Bio");
@@ -40,7 +41,13 @@ public class HeroDetailView extends DetailPage<Hero> {
     private final InformationWrapper nameWrapper = new InformationWrapper("Name", null);
     private final InformationWrapper genderWrapper = new InformationWrapper("Gender", null);
     private final H2 skillInformationHeading = new H2("Skill Information");
+    private final InformationWrapper skillNameWrapper = new InformationWrapper("Skill Name", null);
+    private final InformationWrapper skillDescriptionWrapper = new InformationWrapper("Skill Description", null);
     private final InformationWrapper skillElementWrapper = new InformationWrapper("Skill Element", null);
+    private final H2 limitBurstInformationHeading = new H2("Limit Burst");
+    private final InformationWrapper limitBurstNameWrapper = new InformationWrapper("Name", null);
+    private final InformationWrapper limitBurstDescriptionWrapper = new InformationWrapper("Description", null);
+
 
     @Autowired
     private HeroRepository heroRepository;
@@ -78,27 +85,28 @@ public class HeroDetailView extends DetailPage<Hero> {
 
         descriptionHeading.setWidth("100%");
 
-        basicInformationLayout.setWidth("50%");
         basicInformationLayout.setHeight(null);
-        basicInformationLayout.setSpacing(false);
         basicInformationLayout.add(basicInformationHeading);
-        basicInformationLayout.setHorizontalComponentAlignment(FlexComponent.Alignment.CENTER,
-                basicInformationHeading);
+        basicInformationLayout.setJustifyContentMode(JustifyContentMode.CENTER);
         basicInformationLayout.add(nameWrapper);
         basicInformationLayout.add(genderWrapper);
-        basicInformationLayout.getStyle().set("min-width", "min-content");
 
-        skillInformationLayout.setWidth("50%");
         skillInformationLayout.setHeight(null);
-        skillInformationLayout.setSpacing(false);
         skillInformationLayout.add(skillInformationHeading);
+        skillInformationLayout.add(skillNameWrapper);
+        skillInformationLayout.add(skillDescriptionWrapper);
         skillInformationLayout.add(skillElementWrapper);
-        skillInformationLayout.getStyle().set("min-width", "min-content");
 
-        primaryInformationLayout.setSizeFull();
-        primaryInformationLayout.getStyle().set("flex-wrap", "wrap");
-        primaryInformationLayout.add(basicInformationLayout);
-        primaryInformationLayout.add(skillInformationLayout);
+        limitBurstLayout.setHeight(null);
+        limitBurstLayout.add(limitBurstInformationHeading);
+        limitBurstLayout.add(limitBurstNameWrapper);
+        limitBurstLayout.add(limitBurstDescriptionWrapper);
+
+        informationContainerLayout.setSizeFull();
+        informationContainerLayout.getStyle().set("flex-wrap", "wrap");
+        informationContainerLayout.add(basicInformationLayout);
+        informationContainerLayout.add(skillInformationLayout);
+        informationContainerLayout.add(limitBurstLayout);
 
         masterLayout.setSizeFull();
         masterLayout.add(headerLayout);
@@ -107,7 +115,7 @@ public class HeroDetailView extends DetailPage<Hero> {
         masterLayout.add(descriptionHeading);
         masterLayout.setHorizontalComponentAlignment(FlexComponent.Alignment.CENTER,
                 descriptionHeading);
-        masterLayout.add(primaryInformationLayout);
+        masterLayout.add(informationContainerLayout);
         this.add(masterLayout);
     }
 
@@ -116,6 +124,10 @@ public class HeroDetailView extends DetailPage<Hero> {
         generateAndBindReadOnly(hero -> nameWrapper.setComponent(new Label(hero.getName())));
         generateAndBindReadOnly(hero -> descriptionHeading.setText(hero.getBio()));
         generateAndBindReadOnly(hero -> genderWrapper.setComponent(new Label(hero.getGender().getName())));
+        generateAndBindReadOnly(hero -> skillNameWrapper.setComponent(new Label(hero.getSkillName())));
+        generateAndBindReadOnly(hero -> skillDescriptionWrapper.setComponent(new Label(hero.getSkillDescription())));
         generateAndBindReadOnly(hero -> skillElementWrapper.setComponent(new Label(hero.getSkillElement().getName())));
+        generateAndBindReadOnly(hero -> limitBurstNameWrapper.setComponent(new Label(hero.getLimitBurst().getName())));
+        generateAndBindReadOnly(hero -> limitBurstDescriptionWrapper.setComponent(new Label(hero.getLimitBurst().getDescription())));
     }
 }

@@ -4,9 +4,9 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
-public class InformationWrapper extends Composite<HorizontalLayout> {
+public class InformationWrapper extends Composite<FlexLayout> {
     private final Label descriptionLabel = new Label();
     private final Div containerDiv = new Div();
     private Component component;
@@ -23,7 +23,8 @@ public class InformationWrapper extends Composite<HorizontalLayout> {
             this.component = component;
             containerDiv.add(component);
         }
-        getContent().setSizeFull();
+        getContent().getStyle().set("min-width", "min-content");
+        getContent().getStyle().set("min-height", "min-content");
         getContent().add(descriptionLabel, containerDiv);
     }
 
