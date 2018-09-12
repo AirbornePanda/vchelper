@@ -1,6 +1,5 @@
 package de.jsauer.spring.views;
 
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
@@ -16,7 +15,6 @@ import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.backend.entities.Hero;
 import de.jsauer.spring.backend.entities.LimitBurst;
 import de.jsauer.spring.backend.repositories.LimitBurstRepository;
-import de.jsauer.spring.components.InformationLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
