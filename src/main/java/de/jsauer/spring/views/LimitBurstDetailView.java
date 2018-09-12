@@ -74,25 +74,40 @@ public class LimitBurstDetailView extends DetailPage<LimitBurst> {
         this.add(masterLayout);
     }
 
+    /**
+     * Add the related {@link Hero}s to the {@link LimitBurst}
+     */
     private void addRelatedHeroes() {
         for (Hero hero: getBinder().getBean().getHeroes()) {
-            FlexLayout layout = new FlexLayout();
-            layout.getStyle().set("flex-direction", "column");
-            layout.getStyle().set("margin-right", "30px");
-            layout.setWidth("75px");
-            layout.setAlignItems(Alignment.CENTER);
+            FlexLayout outerContainer = new FlexLayout();
+            FlexLayout innerContainer = new FlexLayout();
+
+            outerContainer.getStyle().set("margin-right", "30px");
+            outerContainer.setWidth("75px");
+            innerContainer.getStyle().set("position", "relative");
+            innerContainer.setAlignItems(Alignment.CENTER);
+            innerContainer.getStyle().set("flex-direction", "column");
+
             Image image = new Image();
             image.setSrc(new StreamResource("", () -> new ByteArrayInputStream(hero.getImage())));
             image.setHeight("75px");
             image.setWidth("75px");
 
-            RouterLink routerLink = new RouterLink(hero.getName(), HeroDetailView.class, hero.getId());
-            routerLink.getStyle().set("text-align", "center");
+            RouterLink imageTitle = new RouterLink(hero.getName(), HeroDetailView.class, hero.getId());
+            imageTitle.getStyle().set("text-align", "center");
 
-            layout.add(image);
-            layout.add(routerLink);
+            RouterLink imageLink = new RouterLink("", HeroDetailView.class, hero.getId());
+            imageLink.getStyle().set("position", "absolute");
+            imageLink.getStyle().set("left", "0px");
+            imageLink.getStyle().set("top", "0px");
+            imageLink.getStyle().set("height", "100%");
+            imageLink.getStyle().set("width", "100%");
 
-            containerLayout.add(layout);
+            innerContainer.add(image);
+            innerContainer.add(imageLink);
+            innerContainer.add(imageTitle);
+            outerContainer.add(innerContainer);
+            containerLayout.add(outerContainer);
         }
     }
 
