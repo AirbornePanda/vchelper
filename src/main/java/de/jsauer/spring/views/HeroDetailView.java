@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
 
-@Route("heroDetail")
+@Route(value = "heroDetail", layout = MenuLayout.class)
 public class HeroDetailView extends DetailPage<Hero> {
     private static final Logger log = LoggerFactory.getLogger(HeroDetailView.class);
 
@@ -88,7 +88,7 @@ public class HeroDetailView extends DetailPage<Hero> {
 
         basicInformationLayout.setHeight(null);
         basicInformationLayout.add(basicInformationHeading);
-        basicInformationLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+        basicInformationLayout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         basicInformationLayout.add(nameWrapper);
         basicInformationLayout.add(genderWrapper);
 

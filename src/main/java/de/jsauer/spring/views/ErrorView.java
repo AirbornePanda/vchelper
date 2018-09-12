@@ -6,7 +6,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("Error")
-@Route("error")
+@Route(value = "error", layout = MenuLayout.class)
 public class ErrorView extends VerticalLayout {
     public ErrorView() {
         add(new Label("There was an error navigating!"));

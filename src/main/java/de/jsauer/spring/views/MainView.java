@@ -4,6 +4,7 @@ import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
@@ -15,13 +16,16 @@ import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.Application;
 import de.jsauer.spring.backend.entities.Hero;
 import de.jsauer.spring.backend.repositories.HeroRepository;
 import de.jsauer.spring.utility.GarmGrabber;
+import org.hibernate.annotations.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -31,9 +35,9 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-@Route
+@Route(layout = MenuLayout.class)
 @PageTitle("Hero Overview")
-public class MainView extends VerticalLayout {
+public class MainView extends AbstractView {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -114,11 +118,11 @@ public class MainView extends VerticalLayout {
         heroGrid.addColumn(hero -> hero.getGender() == null ? "No gender defined!" : hero.getGender().getName()).setSortProperty("gender").setHeader("Gender");
         heroGrid.setMultiSort(true);
 
-        heroGrid.setSizeFull();
+        heroGrid.setWidth("100%");
+        heroGrid.setHeight("inherit");
 
         heroGrid.setDataProvider(filteredHeroDataProvider);
 
-        this.setSizeFull();
         add(heroGrid);
 
         Button btImport = new Button("import");
@@ -126,7 +130,6 @@ public class MainView extends VerticalLayout {
             garmGrabber.grabBasicHeroInformation();
             heroProvider.refreshAll();
         });
-
         add(btImport);
     }
 

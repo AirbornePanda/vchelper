@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
 
-@Route("limitBurstDetail")
+@Route(value = "limitBurstDetail", layout = MenuLayout.class)
 public class LimitBurstDetailView extends DetailPage<LimitBurst> {
 
     private final VerticalLayout masterLayout = new VerticalLayout();
@@ -83,7 +83,7 @@ public class LimitBurstDetailView extends DetailPage<LimitBurst> {
             outerContainer.getStyle().set("margin-right", "30px");
             outerContainer.setWidth("75px");
             innerContainer.getStyle().set("position", "relative");
-            innerContainer.setAlignItems(Alignment.CENTER);
+            innerContainer.setAlignItems(FlexComponent.Alignment.CENTER);
             innerContainer.getStyle().set("flex-direction", "column");
 
             Image image = new Image();
