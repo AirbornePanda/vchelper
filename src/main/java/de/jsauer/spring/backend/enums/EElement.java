@@ -6,7 +6,7 @@ package de.jsauer.spring.backend.enums;
 public enum EElement {
     LIGHT("Light"),
     DARKNESS("Darkness"),
-    WATEER("Water"),
+    WATER("Water"),
     FIRE("Fire"),
     EARTH("Earth"),
     OTHER("Other"),

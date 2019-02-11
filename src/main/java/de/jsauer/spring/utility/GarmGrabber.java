@@ -346,7 +346,7 @@ public class GarmGrabber {
                     hero.setSkillElement(EElement.LIGHT);
                     break;
                 case "Water":
-                    hero.setSkillElement(EElement.WATEER);
+                    hero.setSkillElement(EElement.WATER);
                     break;
                 case "Other":
                     hero.setSkillElement(EElement.OTHER);

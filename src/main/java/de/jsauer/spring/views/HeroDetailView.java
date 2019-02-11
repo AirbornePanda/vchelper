@@ -16,12 +16,14 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.backend.entities.Hero;
+import de.jsauer.spring.backend.enums.EElement;
 import de.jsauer.spring.backend.repositories.HeroRepository;
 import de.jsauer.spring.components.InformationLayout;
 import de.jsauer.spring.components.InformationWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Route(value = "heroDetail", layout = MenuLayout.class)
@@ -127,7 +129,7 @@ public class HeroDetailView extends DetailPage<Hero> {
         generateAndBindReadOnly(hero -> genderWrapper.setComponent(new Label(hero.getGender().getName())));
         generateAndBindReadOnly(hero -> skillNameWrapper.setComponent(new Label(hero.getSkillName())));
         generateAndBindReadOnly(hero -> skillDescriptionWrapper.setComponent(new Label(hero.getSkillDescription())));
-        generateAndBindReadOnly(hero -> skillElementWrapper.setComponent(new Label(hero.getSkillElement().getName())));
+        generateAndBindReadOnly(hero -> skillElementWrapper.setComponent(new RouterLink(hero.getSkillElement().getName(), SkillElementDetailView.class, Long.valueOf(Arrays.asList(EElement.values()).indexOf(hero.getSkillElement())))));
         generateAndBindReadOnly(hero -> limitBurstNameWrapper.setComponent(new RouterLink(hero.getLimitBurst().getName(), LimitBurstDetailView.class, hero.getLimitBurst().getId())));
         generateAndBindReadOnly(hero -> limitBurstDescriptionWrapper.setComponent(new Label(hero.getLimitBurst().getDescription())));
     }
