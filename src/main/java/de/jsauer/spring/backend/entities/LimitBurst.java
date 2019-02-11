@@ -15,7 +15,6 @@ public class LimitBurst extends de.jsauer.spring.backend.entities.Entity {
     @OneToMany (mappedBy = "limitBurst", fetch = FetchType.EAGER)
     private List<Hero> heroes = new ArrayList<>();
 
-
     private String name;
 
     @Lob
