@@ -13,16 +13,16 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.backend.entities.Hero;
-import de.jsauer.spring.backend.entities.LimitBurst;
 import de.jsauer.spring.backend.enums.EElement;
 import de.jsauer.spring.backend.repositories.HeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
-import java.util.Optional;
 
-@Route(value = "skillElementDetail", layout = MenuLayout.class)
+@Route(value = SkillElementDetailView.VIEW_NAME, layout = MenuLayout.class)
 public class SkillElementDetailView extends DetailPage<EElement> {
+
+    public static final String VIEW_NAME = "skillElementDetail";
 
     private final VerticalLayout masterLayout = new VerticalLayout();
     private final HorizontalLayout headerLayout = new HorizontalLayout();

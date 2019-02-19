@@ -2,6 +2,7 @@ package de.jsauer.spring.views;
 
 import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
@@ -26,9 +27,10 @@ import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.Optional;
 
-@Route(value = "heroDetail", layout = MenuLayout.class)
+@Route(value = HeroDetailView.VIEW_NAME, layout = MenuLayout.class)
 public class HeroDetailView extends DetailPage<Hero> {
-    private static final Logger log = LoggerFactory.getLogger(HeroDetailView.class);
+    public static final String VIEW_NAME = "heroDetail";
+    private static final Logger LOGGER = LoggerFactory.getLogger(HeroDetailView.class);
 
     private final VerticalLayout masterLayout = new VerticalLayout();
     private final HorizontalLayout headerLayout = new HorizontalLayout();

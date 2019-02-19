@@ -20,8 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
 
-@Route(value = "limitBurstDetail", layout = MenuLayout.class)
+@Route(value = LimitBurstDetailView.VIEW_NAME, layout = MenuLayout.class)
 public class LimitBurstDetailView extends DetailPage<LimitBurst> {
+    public static final String VIEW_NAME = "limitBurstDetail";
 
     private final VerticalLayout masterLayout = new VerticalLayout();
     private final HorizontalLayout headerLayout = new HorizontalLayout();

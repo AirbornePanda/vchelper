@@ -4,28 +4,25 @@ import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ConfigurableFilterDataProvider;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.spring.Application;
 import de.jsauer.spring.backend.entities.Hero;
 import de.jsauer.spring.backend.repositories.HeroRepository;
 import de.jsauer.spring.utility.GarmGrabber;
-import org.hibernate.annotations.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,11 +32,11 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-@Route(layout = MenuLayout.class)
+@Route(value = MainView.VIEW_NAME, layout = MenuLayout.class)
 @PageTitle("Hero Overview")
 public class MainView extends AbstractView {
-
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    public static final String VIEW_NAME = "";
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 
     private final Grid<Hero> heroGrid = new Grid<>();
     private final TextField heroNameFilter = new TextField();
@@ -153,7 +150,7 @@ public class MainView extends AbstractView {
     }
 
     /**
-     * Generates stars displayed for the {@link Hero#initialRarity}.
+     * Generates stars displayed for the {@link Hero#getInitialRarity()}.
      * @param hero a {@link Hero}
      * @return a {@link HorizontalLayout} containing stars and the number.
      */
