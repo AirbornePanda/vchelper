@@ -4,19 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.jsauer</groupId>
-    <artifactId>vchelper</artifactId>
-    <name>VCHelper</name>
+    <artifactId>valhalla</artifactId>
+    <name>Valhalla</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <url>https://github.com/AirbornePanda/vchelper</url>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <!-- Dependencies -->
-        <vaadin.version>13.0.0.beta1</vaadin.version>
+        <vaadin.login.version>1.0.0</vaadin.login.version>
+        <vaadin.version.old>12.0.6</vaadin.version.old>
+        <vaadin.version.new>13.0.0.beta1</vaadin.version.new>
     </properties>
 
     <parent>
@@ -36,26 +38,17 @@
         </repository>
     </repositories>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
+        <!-- Basic vaadin and spring dependencies for the project !-->
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-login-flow</artifactId>
+            <version>${vaadin.login.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
+            <version>${vaadin.version.new}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -78,10 +71,17 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-maven-plugin</artifactId>
+            <version>${vaadin.version.old}</version>
+        </dependency>
+        <!-- For grabbing information from other websites !-->
+        <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.11.3</version>
         </dependency>
+        <!-- For connecting to database !-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -158,7 +158,7 @@
                     <plugin>
                         <groupId>com.vaadin</groupId>
                         <artifactId>vaadin-maven-plugin</artifactId>
-                        <version>12.0.5</version>
+                        <version>${vaadin.version.old}</version>
                         <executions>
                             <execution>
                                 <goals>
