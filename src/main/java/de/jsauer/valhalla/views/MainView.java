@@ -114,6 +114,7 @@ public class MainView extends AbstractView {
 
         //TODO Fix size of grid in the view (view non scrollable) -> Could be fixed in new vaadin version
         heroGrid.setWidth("100%");
+        heroGrid.setMinHeight("100px");
 
         heroGrid.setDataProvider(filteredHeroDataProvider);
 
@@ -122,6 +123,10 @@ public class MainView extends AbstractView {
             garmGrabber.grabBasicHeroInformation();
             heroProvider.refreshAll();
         });
+
+        setHeight("100%");
+        getStyle().set("display", "flex");
+        getStyle().set("flex-direction", "column");
         add(heroGrid);
         add(btImport);
     }

@@ -18,7 +18,7 @@
         <!-- Dependencies -->
         <vaadin.login.version>1.0.0</vaadin.login.version>
         <vaadin.version.old>12.0.6</vaadin.version.old>
-        <vaadin.version.new>13.0.0.beta1</vaadin.version.new>
+        <vaadin.version.new>13.0.0</vaadin.version.new>
     </properties>
 
     <parent>
