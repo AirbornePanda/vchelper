@@ -112,7 +112,6 @@ public class MainView extends AbstractView {
         heroGrid.addColumn(hero -> hero.getGender() == null ? "No gender defined!" : hero.getGender().getName()).setSortProperty("gender").setHeader("Gender");
         heroGrid.setMultiSort(true);
 
-        //TODO Fix size of grid in the view (view non scrollable) -> Could be fixed in new vaadin version
         heroGrid.setWidth("100%");
         heroGrid.setMinHeight("100px");
 
