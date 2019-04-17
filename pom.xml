@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- Dependencies -->
         <vaadin.login.version>1.0.0</vaadin.login.version>
-        <vaadin.version.old>12.0.6</vaadin.version.old>
+        <vaadin.version.old>13.0.0</vaadin.version.old>
         <vaadin.version.new>13.0.0</vaadin.version.new>
     </properties>
 
@@ -74,6 +74,17 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-maven-plugin</artifactId>
             <version>${vaadin.version.old}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jsauer</groupId>
+            <artifactId>vaadin-toolbox</artifactId>
+            <version>1.0-Snapshot</version>
+        </dependency>
+        <!-- New App Layout -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-app-layout-flow</artifactId>
+            <version>2.0.0.alpha1</version>
         </dependency>
         <!-- For grabbing information from other websites !-->
         <dependency>

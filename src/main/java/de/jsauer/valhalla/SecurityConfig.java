@@ -8,7 +8,9 @@ import de.jsauer.valhalla.views.HeroDetailView;
 import de.jsauer.valhalla.views.LimitBurstDetailView;
 import de.jsauer.valhalla.views.LoginView;
 import de.jsauer.valhalla.views.MainView;
+import de.jsauer.valhalla.views.PrivacyView;
 import de.jsauer.valhalla.views.SkillElementDetailView;
+import de.jsauer.valhalla.views.TeamBuilderView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +21,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -51,7 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             LoginView.class,
             HeroDetailView.class,
             LimitBurstDetailView.class,
-            SkillElementDetailView.class
+            SkillElementDetailView.class,
+            TeamBuilderView.class,
+            PrivacyView.class
 
     };
 
@@ -65,8 +68,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/" + LoginView.VIEW_NAME + ".*",
             "/" + HeroDetailView.VIEW_NAME + ".*",
             "/" + SkillElementDetailView.VIEW_NAME + ".*",
-            "/" + LimitBurstDetailView.VIEW_NAME + ".*"
-
+            "/" + LimitBurstDetailView.VIEW_NAME + ".*",
+            "/" + TeamBuilderView.VIEW_NAME + ".*",
+            "/" + PrivacyView.VIEW_NAME + ".*"
 
     };
 
@@ -77,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable() //csrf handled by vaadin
                 .exceptionHandling()
                     .accessDeniedPage("/" + ErrorView.VIEW_NAME) //set error page
-                    .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/" + LoginView.VIEW_NAME))
+                 //   .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/" + LoginView.VIEW_NAME))
                 .and()
                     .logout()
                         .logoutSuccessUrl("/")
@@ -92,7 +96,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .permitAll()
                     // deny any other URL until authenticated
                     .anyRequest()
-                        .fullyAuthenticated();
+                       // .fullyAuthenticated();
+                        .permitAll();
         /*
              Note that anonymous authentication is enabled by default, therefore;
              SecurityContextHolder.getContext().getAuthentication().isAuthenticated() always will return true.

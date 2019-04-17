@@ -20,6 +20,7 @@ import com.vaadin.flow.server.StreamResource;
 import de.jsauer.valhalla.backend.entities.Hero;
 import de.jsauer.valhalla.backend.repositories.HeroRepository;
 import de.jsauer.valhalla.utility.GarmGrabber;
+import de.jsauer.valhalla.utility.ValkypediaGrabber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -38,7 +39,7 @@ public class MainView extends AbstractView {
     private final Grid<Hero> heroGrid = new Grid<>();
     private final TextField heroNameFilter = new TextField();
 
-    public MainView(@Autowired HeroRepository heroRepository, @Autowired GarmGrabber garmGrabber) {
+    public MainView(@Autowired HeroRepository heroRepository, @Autowired GarmGrabber garmGrabber, @Autowired ValkypediaGrabber valkypediaGrabber) {
         DataProvider<Hero, String> heroProvider = DataProvider.fromFilteringCallbacks(
                 query -> {
                     Pair<Integer, Integer> limitOffsetPair = limitAndOffsetToPageSizeAndNumber(query.getOffset(), query.getLimit());
@@ -119,7 +120,7 @@ public class MainView extends AbstractView {
 
         Button btImport = new Button("import");
         btImport.addClickListener(event -> {
-            garmGrabber.grabBasicHeroInformation();
+            valkypediaGrabber.grabAllGear();
             heroProvider.refreshAll();
         });
 

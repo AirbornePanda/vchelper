@@ -20,6 +20,8 @@ import java.util.List;
 @Entity
 public class Hero extends de.jsauer.valhalla.backend.entities.Entity {
 
+    private String valkypediaId;
+
     private String garmId;
 
     private String name;
@@ -57,6 +59,14 @@ public class Hero extends de.jsauer.valhalla.backend.entities.Entity {
 
     public Hero() {
 
+    }
+
+    public String getValkypediaId() {
+        return valkypediaId;
+    }
+
+    public void setValkypediaId(String valkypediaId) {
+        this.valkypediaId = valkypediaId;
     }
 
     public String getGarmId() {

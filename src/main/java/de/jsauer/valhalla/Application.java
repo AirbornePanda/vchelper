@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class Application {
+    public static final String HERO_IMAGE_LOCATION = "/frontend/img/heroes/";
+    public static final String GEAR_IMAGE_LOCATION = "/frontend/img/gear/";
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
