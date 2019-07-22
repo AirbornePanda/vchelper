@@ -19,12 +19,12 @@ This functionality can be accessed under http://localhost:8080/teamBuilder.
 **This functionality has not been finished yet!**
 
 ## Prerequisites
-###Nodejs
+### Nodejs
 Have [Node.js](https://nodejs.org/en/) installed. If you haven't or it can't be located, Vaadin will throw an error and abort.
  
 Alternatively you can run `mvn com.github.eirslett:frontend-maven-plugin:1.7.6:install-node-and-npm -DnodeVersion="v11.6.0"` beforehand.
 
-###Persistent Database
+### Persistent Database
 This tool comes with an integrated in memory H2 database, but those data will be lost on application restart because the database is **not** persistent.
 If you have a persistent database you can configure it in the application.properties file (src/main/resources/application.properties). It already includes examples to make the setup easy.
 
