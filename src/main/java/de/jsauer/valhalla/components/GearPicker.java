@@ -1,6 +1,5 @@
 package de.jsauer.valhalla.components;
 
-import com.vaadin.flow.component.HasTheme;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -12,8 +11,6 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.theme.lumo.Lumo;
 import de.jsauer.valhalla.Application;
 import de.jsauer.valhalla.backend.entities.Gear;
 import de.jsauer.valhalla.backend.repositories.GearRepository;

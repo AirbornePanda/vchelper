@@ -1,10 +1,10 @@
 package de.jsauer.valhalla.views;
 
-import com.vaadin.external.org.slf4j.Logger;
-import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @PageTitle("Error")
 @Route(value = ErrorView.VIEW_NAME, layout = MenuLayout.class)

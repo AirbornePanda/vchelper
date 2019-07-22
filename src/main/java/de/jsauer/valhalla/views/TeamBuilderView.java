@@ -1,7 +1,6 @@
 package de.jsauer.valhalla.views;
 
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.Label;
@@ -10,7 +9,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
-import de.jsauer.vaadintoolbox.Card;
+import de.jsauer.valhalla.components.Card;
 import de.jsauer.valhalla.components.TeamLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 

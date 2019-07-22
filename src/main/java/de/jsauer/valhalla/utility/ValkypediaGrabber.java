@@ -1,7 +1,5 @@
 package de.jsauer.valhalla.utility;
 
-import com.vaadin.external.org.slf4j.Logger;
-import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.flow.server.VaadinServlet;
 import de.jsauer.valhalla.Application;
 import de.jsauer.valhalla.backend.entities.Gear;
@@ -11,6 +9,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

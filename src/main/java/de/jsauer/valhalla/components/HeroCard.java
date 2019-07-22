@@ -7,7 +7,6 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import de.jsauer.vaadintoolbox.Card;
 import de.jsauer.valhalla.Application;
 import de.jsauer.valhalla.backend.entities.Gear;
 import de.jsauer.valhalla.backend.entities.Hero;

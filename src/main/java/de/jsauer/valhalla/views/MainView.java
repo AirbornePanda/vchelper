@@ -1,7 +1,5 @@
 package de.jsauer.valhalla.views;
 
-import com.vaadin.external.org.slf4j.Logger;
-import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
@@ -21,6 +19,8 @@ import de.jsauer.valhalla.backend.entities.Hero;
 import de.jsauer.valhalla.backend.repositories.HeroRepository;
 import de.jsauer.valhalla.utility.GarmGrabber;
 import de.jsauer.valhalla.utility.ValkypediaGrabber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -120,7 +120,7 @@ public class MainView extends AbstractView {
 
         Button btImport = new Button("import");
         btImport.addClickListener(event -> {
-            valkypediaGrabber.grabAllGear();
+            garmGrabber.grabBasicHeroInformation();
             heroProvider.refreshAll();
         });
 

@@ -1,7 +1,6 @@
 package de.jsauer.valhalla.components;
 
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

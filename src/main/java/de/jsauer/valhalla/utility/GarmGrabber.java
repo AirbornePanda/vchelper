@@ -1,7 +1,5 @@
 package de.jsauer.valhalla.utility;
 
-import com.vaadin.external.org.slf4j.Logger;
-import com.vaadin.external.org.slf4j.LoggerFactory;
 import de.jsauer.valhalla.backend.entities.Hero;
 import de.jsauer.valhalla.backend.entities.LimitBurst;
 import de.jsauer.valhalla.backend.enums.EDamageType;
@@ -18,6 +16,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

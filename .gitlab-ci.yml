@@ -1,0 +1,9 @@
+image: maven:3-jdk-12
+
+build:
+  before_script:
+    - yum install which -y
+
+  script:
+    - mvn com.github.eirslett:frontend-maven-plugin:1.7.6:install-node-and-npm -DnodeVersion="v11.6.0"
+    - mvn clean package sonar:sonar -Dsonar.projectKey=AirbornePanda_VaadinSpringBootStarter -Dsonar.organization=airbornepanda -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN

@@ -1,7 +1,5 @@
 package de.jsauer.valhalla.views;
 
-import com.vaadin.external.org.slf4j.Logger;
-import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H4;
@@ -20,6 +18,8 @@ import de.jsauer.valhalla.backend.enums.EElement;
 import de.jsauer.valhalla.backend.repositories.HeroRepository;
 import de.jsauer.valhalla.components.InformationLayout;
 import de.jsauer.valhalla.components.InformationWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
