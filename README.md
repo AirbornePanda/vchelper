@@ -1,4 +1,10 @@
 # Valhalla
+[![pipeline status](https://gitlab.com/AirbornePanda/valhalla/badges/master/pipeline.svg)](https://gitlab.com/AirbornePanda/valhalla/commits/master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AirbornePanda_vchelper&metric=alert_status)](https://sonarcloud.io/dashboard?id=AirbornePanda_vchelper)
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=AirbornePanda_vchelper&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=AirbornePanda_vchelper)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=AirbornePanda_vchelper&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=AirbornePanda_vchelper)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=AirbornePanda_vchelper&metric=security_rating)](https://sonarcloud.io/dashboard?id=AirbornePanda_vchelper)
 
 This is a personal project to play around with [Vaadin](https://vaadin.com/) and [Spring Boot](https://spring.io/projects/spring-boot/).
 
