@@ -10,6 +10,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.Route;
 import de.jsauer.valhalla.components.Card;
+import de.jsauer.valhalla.components.MenuLayout;
 import de.jsauer.valhalla.components.TeamLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 

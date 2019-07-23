@@ -17,6 +17,7 @@ import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.StreamResource;
 import de.jsauer.valhalla.backend.entities.Hero;
 import de.jsauer.valhalla.backend.repositories.HeroRepository;
+import de.jsauer.valhalla.components.MenuLayout;
 import de.jsauer.valhalla.utility.GarmGrabber;
 import de.jsauer.valhalla.utility.ValkypediaGrabber;
 import org.slf4j.Logger;

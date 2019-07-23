@@ -1,6 +1,7 @@
 package de.jsauer.valhalla.views;
 
 import com.vaadin.flow.router.Route;
+import de.jsauer.valhalla.components.MenuLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

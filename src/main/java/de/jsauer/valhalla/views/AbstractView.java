@@ -23,7 +23,6 @@ public abstract class AbstractView extends Div implements BeforeEnterObserver {
                 && !request.isUserInRole("ADMIN")
                 //Prevents loop
                 && enterEvent.getNavigationTarget() != ErrorView.class) {
-
             enterEvent.rerouteTo(ErrorView.class);
         }
     }

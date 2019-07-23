@@ -35,31 +35,31 @@ public class GarmGrabber {
     /**
      * {@link Logger} for this class.
      */
-    private static final Logger log = LoggerFactory.getLogger(GarmGrabber.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GarmGrabber.class);
     /**
      * Link to the site containing basic {@link Hero} information.
      */
-    private static String HERO_PAGE = "https://garm.ml/hero/all";
+    private static final String HERO_PAGE = "https://garm.ml/hero/all";
     /**
      * Link to the hero detail pages.
      */
-    private static String HERO_DETAIL_PAGE = "https://garm.ml/hero/";
+    private static final String HERO_DETAIL_PAGE = "https://garm.ml/hero/";
     /**
      * Link to details of a {@link LimitBurst}.
      */
-    private static String LIMITBURST_PAGE = "https://garm.ml/limit-burst/";
+    private static final String LIMITBURST_PAGE = "https://garm.ml/limit-burst/";
     /**
      * Link to the hero portraits.
      */
-    private static String IMAGE_URL = "https://garm.ml/sites/default/files/styles/hero_icon_small/public/";
+    private static final String IMAGE_URL = "https://garm.ml/sites/default/files/styles/hero_icon_small/public/";
     /**
      * Fallback link to the normal hero portraits.
      */
-    private static String IMAGE_FALLBACK_URL = "https://garm.ml/sites/default/files/icon_character_";
+    private static final String IMAGE_FALLBACK_URL = "https://garm.ml/sites/default/files/icon_character_";
     /**
      * Fallback link to the awakened hero portraits.
      */
-    private static String IMAGE_AWAKENED_FALLBACK_URL = "https://garm.ml/sites/default/files/styles/hero_icon_small/public/icon_character_";
+    private static final String IMAGE_AWAKENED_FALLBACK_URL = "https://garm.ml/sites/default/files/styles/hero_icon_small/public/icon_character_";
 
     @Autowired
     private HeroRepository heroRepository;
@@ -78,14 +78,14 @@ public class GarmGrabber {
         try {
             heroSite = Jsoup.connect(HERO_PAGE).get();
         } catch (IOException e) {
-            log.error("Could not connect to hero page " + currentPage + ". Aborting import");
+            LOGGER.error("Could not connect to hero page {}. Aborting import!", currentPage);
             error = true;
         }
 
         while (heroSite != null && !error) {
             Elements heroElements = heroSite.select("div.views-fluid-grid > ul > li");
             //If there are no heroes found we reached the end and can exit the loop by setting the error flag
-            if (heroElements.size() < 1) {
+            if (heroElements.isEmpty()) {
                 error = true;
             }
             for (Element heroElement : heroElements) {
@@ -101,8 +101,9 @@ public class GarmGrabber {
                     hero.setName(heroElement.select("div.views-field-title > span").text());
                 }
 
-                log.debug("Currently working on: " + hero.getName());
-                log.debug("Started getting the portrait of " + hero.getName());
+                LOGGER.debug("Currently working on {}", hero.getName());
+
+                LOGGER.debug("Started getting the portrait of {}", hero.getName());
 
                 //Retrieve the hero image
                 try {
@@ -112,10 +113,10 @@ public class GarmGrabber {
                         heroImageStream.close();
                     }
                 } catch (IOException e) {
-                    log.error("Could no grab hero image. Will be empty");
+                    LOGGER.error("Could no grab hero image. Will be empty.");
                 }
 
-                log.debug("Finished getting the portrait of " + hero.getName());
+                LOGGER.debug("Finished getting the portrait of {}", hero.getName());
 
                 grabHeroDetails(hero);
 
@@ -127,7 +128,7 @@ public class GarmGrabber {
             try {
                 heroSite = Jsoup.connect(HERO_PAGE + "?page=" + currentPage).get();
             } catch (IOException e) {
-                log.error("Could not connect to hero page " + currentPage + ". Aborting import");
+                LOGGER.error("Could not connect to hero page {}. Aborting import!", currentPage );
                 error = true;
             }
         }
@@ -188,7 +189,7 @@ public class GarmGrabber {
         try {
             heroDetailSite = Jsoup.connect(HERO_DETAIL_PAGE + hero.getGarmId()).get();
         } catch (IOException e) {
-            log.error("Could not get detail page for: " + hero.getName() + " (" + hero.getGarmId() + ")");
+            LOGGER.error("Could not get detail page for: {} ({})", hero.getName(), hero.getGarmId());
             return;
         }
         //Set initial rarity
@@ -390,7 +391,7 @@ public class GarmGrabber {
         try {
             limitBurstSite = Jsoup.connect(LIMITBURST_PAGE + garmID).get();
         } catch (IOException e) {
-            log.error("Could not connect to hero page " + LIMITBURST_PAGE + garmID + ". Aborting import!");
+            LOGGER.error("Could not connect to hero page {}{}. Aborting import!", LIMITBURST_PAGE, garmID);
             return null;
         }
 
@@ -434,7 +435,7 @@ public class GarmGrabber {
         try {
             response = ((HttpURLConnection) url.openConnection()).getResponseCode();
         } catch (IOException e) {
-            log.error("Failed Opening URL");
+            LOGGER.error("Failed Opening URL");
             return false;
         }
 

@@ -4,6 +4,7 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.dom.ElementFactory;
 import com.vaadin.flow.router.Route;
+import de.jsauer.valhalla.components.MenuLayout;
 
 /**
  * View for displaying the privacy statement.

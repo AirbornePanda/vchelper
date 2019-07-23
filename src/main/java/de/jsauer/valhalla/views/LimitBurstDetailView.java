@@ -15,6 +15,7 @@ import com.vaadin.flow.server.StreamResource;
 import de.jsauer.valhalla.backend.entities.Hero;
 import de.jsauer.valhalla.backend.entities.LimitBurst;
 import de.jsauer.valhalla.backend.repositories.LimitBurstRepository;
+import de.jsauer.valhalla.components.MenuLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;

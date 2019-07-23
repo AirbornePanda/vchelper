@@ -18,6 +18,7 @@ import de.jsauer.valhalla.backend.enums.EElement;
 import de.jsauer.valhalla.backend.repositories.HeroRepository;
 import de.jsauer.valhalla.components.InformationLayout;
 import de.jsauer.valhalla.components.InformationWrapper;
+import de.jsauer.valhalla.components.MenuLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
