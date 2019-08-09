@@ -43,7 +43,7 @@ See [this blog entry](https://vaadin.com/blog/vaadin-10-and-static-resources) fo
 
 ### Bootstrap
 This application supports [Bootstrap](https://getbootstrap.com/). For this, the annotations (`@NpmPackage`, `@JsModule` and `@StyleSheet`) inside `src/main/java/de/jsauer/valhalla/components/MenuLayout` are used.
-Additionally the css of the package has to be copied. This is done by maven. Check the configuration inside the `pom.xml`.
+Additionally the css of the bootstrap package has to be copied. But don't worry. This will be done automatically by maven. Check the configuration inside the `pom.xml`.
 The layout class is used, because it's present on all views, making bootstrap available in all of them.
 
 ## Error Handling
