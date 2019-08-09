@@ -20,10 +20,12 @@
         <junit-jupiter-api.version>5.5.0</junit-jupiter-api.version>
         <junit-platform-commons.version>1.5.0</junit-platform-commons.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
         <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
         <spring-test.version>5.1.8.RELEASE</spring-test.version>
         <spring-security.version>5.1.5.RELEASE</spring-security.version>
-        <vaadin.version>14.0.0.rc6</vaadin.version>
+        <vaadin.version>14.0.0.rc9</vaadin.version>
     </properties>
 
     <!--
@@ -193,6 +195,47 @@
                 <configuration>
                     <source>12</source>
                     <target>12</target>
+                </configuration>
+            </plugin>
+            <!--
+                This copies the needed css file for the use of Bootstrap.
+                If you don't want to use it, you can remove this plugin.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>Copy Bootstrap css</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/src/main/webapp/frontend/styles</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>node_modules/bootstrap/dist/css</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>bootstrap.min.css</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--
+                If you want to deploy this as a war without a web.xml, use this.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
         </plugins>
