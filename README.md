@@ -63,10 +63,3 @@ Run `mvn spring-boot:run`.
 
 ### NPM packages don't update on `mvn spring-boot:run`
 See above (Wall of errors like 'ERROR in ../target/frontend/generated-flow-imports')
-
-
-
-
-
-)
-
