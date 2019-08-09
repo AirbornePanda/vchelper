@@ -11,6 +11,9 @@
     <url>https://github.com/AirbornePanda/vchelper</url>
 
     <properties>
+        <!-- file encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <h2.version>1.4.199</h2.version>
         <jakarta.servlet-api.version>4.0.2</jakarta.servlet-api.version>
         <jakarta.validation-api.version>2.0.1</jakarta.validation-api.version>
