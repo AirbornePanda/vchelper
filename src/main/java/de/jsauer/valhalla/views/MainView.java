@@ -119,26 +119,18 @@ public class MainView extends AbstractView {
 
         heroGrid.setDataProvider(filteredHeroDataProvider);
 
-        Button btImport = new Button("import");
-        btImport.addClickListener(event -> {
-            garmGrabber.grabBasicHeroInformation();
-            heroProvider.refreshAll();
-        });
-
         setHeight("100%");
         getStyle().set("display", "flex");
         getStyle().set("flex-direction", "column");
         add(heroGrid);
-        add(btImport);
     }
 
     private static Pair<Integer, Integer> limitAndOffsetToPageSizeAndNumber(
             final int offset, final int limit) {
-        int minPageSize = limit;
         int lastIndex = offset + limit - 1;
         int maxPageSize = lastIndex + 1;
 
-        for (double pageSize = minPageSize; pageSize <= maxPageSize; pageSize++) {
+        for (double pageSize = limit; pageSize <= maxPageSize; pageSize++) {
             int startPage = (int) (offset / pageSize);
             int endPage = (int) (lastIndex / pageSize);
             if (startPage == endPage) {
