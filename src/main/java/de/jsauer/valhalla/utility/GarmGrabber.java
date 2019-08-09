@@ -1,5 +1,9 @@
 package de.jsauer.valhalla.utility;
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.progressbar.ProgressBar;
 import de.jsauer.valhalla.backend.entities.Hero;
 import de.jsauer.valhalla.backend.entities.LimitBurst;
 import de.jsauer.valhalla.backend.enums.EDamageType;
@@ -61,6 +65,26 @@ public class GarmGrabber {
      */
     private static final String IMAGE_AWAKENED_FALLBACK_URL = "https://garm.ml/sites/default/files/styles/hero_icon_small/public/icon_character_";
 
+    /**
+     * Progressbar for the primary progress.
+     */
+    private ProgressBar primaryProgress;
+
+    /**
+     * Progressbar for secondary actions.
+     */
+    private ProgressBar secondaryProgress;
+
+    /**
+     * Label displaying status messages.
+     */
+    private Label statusLabel;
+
+    /**
+     * {@link Image} that is used for the import.
+     */
+    private Image importImage;
+
     @Autowired
     private HeroRepository heroRepository;
 
@@ -76,6 +100,7 @@ public class GarmGrabber {
         boolean error = false;
 
         try {
+            setProgress(null, null, "Connecting to " + HERO_PAGE);
             heroSite = Jsoup.connect(HERO_PAGE).get();
         } catch (IOException e) {
             LOGGER.error("Could not connect to hero page {}. Aborting import!", currentPage);
@@ -88,10 +113,11 @@ public class GarmGrabber {
             if (heroElements.isEmpty()) {
                 error = true;
             }
-            for (Element heroElement : heroElements) {
 
+            primaryProgress.setMax(primaryProgress.getMax() + heroElements.size());
+            for (Element heroElement : heroElements) {
                 String garmId = heroElement.select("div.views-field-field-profile-image > span > a").first().attr("href").substring(6);
-                //Check if the hero is alreade in the database
+                //Check if the hero is already in the database
                 Hero hero = heroRepository.findOneByGarmId(garmId);
 
                 if (hero == null) {
@@ -100,8 +126,8 @@ public class GarmGrabber {
                     hero.setGarmId(garmId);
                     hero.setName(heroElement.select("div.views-field-title > span").text());
                 }
-
                 LOGGER.debug("Currently working on {}", hero.getName());
+                setProgress(primaryProgress, 1d, "Currently working on " + hero.getName());
 
                 LOGGER.debug("Started getting the portrait of {}", hero.getName());
 
@@ -132,6 +158,22 @@ public class GarmGrabber {
                 error = true;
             }
         }
+    }
+
+    /**
+     * The same as {@link #grabBasicHeroInformation()} but you can set status fields to be manipulated.
+     * @param primaryProgress the progressbar for the primary progress
+     * @param secondaryProgress the progressbar for the secondary progress
+     * @param statusLabel the label for the status message
+     */
+    public void grabBasicHeroInformation(final ProgressBar primaryProgress, final ProgressBar secondaryProgress, final Label statusLabel) {
+        this.primaryProgress = primaryProgress;
+        this.secondaryProgress = secondaryProgress;
+        this.statusLabel = statusLabel;
+
+        this.primaryProgress.setMax(0);
+        this.secondaryProgress.setMax(0);
+        grabBasicHeroInformation();
     }
 
     /**
@@ -168,7 +210,7 @@ public class GarmGrabber {
             if (isValidURL(imageSource)) {
                 return imageSource.openStream();
             } else {
-                //Try fallback URL for normal heries
+                //Try fallback URL for normal heroes
                 imageSource = new URL(IMAGE_FALLBACK_URL + hero.getGarmId() + "_1.png");
             }
         }
@@ -373,7 +415,7 @@ public class GarmGrabber {
         Element limitBurstElement = heroDetailSite.selectFirst("div.field-name-field-limit-burst > ul > li > article > h2 > a");
         if (limitBurstElement != null) {
             String limitBurstGarmId = limitBurstElement.attr("href").substring(13);
-            if (limitBurstGarmId != null && !limitBurstGarmId.equals(""))  {
+            if (!limitBurstGarmId.equals(""))  {
                 LimitBurst limitBurst = fetchLimitBurst(limitBurstGarmId);
                 if (limitBurst != null) {
                     hero.setLimitBurst(limitBurst);
@@ -431,7 +473,7 @@ public class GarmGrabber {
         if (url == null) {
             return false;
         }
-        Integer response = null;
+        int response;
         try {
             response = ((HttpURLConnection) url.openConnection()).getResponseCode();
         } catch (IOException e) {
@@ -439,6 +481,24 @@ public class GarmGrabber {
             return false;
         }
 
-        return response.toString().substring(0, 1).equals("2");
+        return Integer.toString(response).substring(0, 1).equals("2");
+    }
+
+    /**
+     * Sets the progress of a given progressbar.
+     * @param progressBar the progressbar
+     * @param progress the additional progress
+     * @param status the status text to be displayed
+     */
+    private void setProgress(final ProgressBar progressBar, final Double progress, final String status) {
+        if (progressBar != null) {
+            progressBar.setValue(progressBar.getValue() + progress);
+        }
+
+        if(statusLabel != null && status != null) {
+            UI.getCurrent().access(() -> statusLabel.setText(status));
+        }
+
+        UI.getCurrent().push();
     }
 }
