@@ -42,7 +42,7 @@ Static resources for a `.jar` should be put into `src/main/resources/META-INF/re
 See [this blog entry](https://vaadin.com/blog/vaadin-10-and-static-resources) for more information.
 
 ### Bootstrap
-This application supports [Bootstrap](https://getbootstrap.com/). For this, the annotations (`@NpmPackage`, `@JsModule` and `StyleSheet`) inside `src/main/java/de/jsauer/valhalla/components/MenuLayout` are used.
+This application supports [Bootstrap](https://getbootstrap.com/). For this, the annotations (`@NpmPackage`, `@JsModule` and `@StyleSheet`) inside `src/main/java/de/jsauer/valhalla/components/MenuLayout` are used.
 Additionally the css of the package has to be copied. This is done by maven. Check the configuration inside the `pom.xml`.
 The layout class is used, because it's present on all views, making bootstrap available in all of them.
 
