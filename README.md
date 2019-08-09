@@ -34,6 +34,13 @@ Alternatively you can run `mvn com.github.eirslett:frontend-maven-plugin:1.7.6:i
 This tool comes with an integrated in memory H2 database, but those data will be lost on application restart because the database is **not** persistent.
 If you have a persistent database you can configure it in the application.properties file (src/main/resources/application.properties). It already includes examples to make the setup easy.
 
+### Static content
+The location to put you static resources depends on the way you build this application. 
+
+Static resources for a `.war` should be put into `src/main/webapp/frontend/`. (Like this project does) 
+Static resources for a `.jar` should be put into `src/main/resources/META-INF/resources/frontend/`.
+See [this blog entry](https://vaadin.com/blog/vaadin-10-and-static-resources) for more information.
+
 ## Error Handling
 ### Wall of errors like 'ERROR in ../target/frontend/generated-flow-imports'
 
