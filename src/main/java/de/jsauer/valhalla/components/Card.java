@@ -48,7 +48,7 @@ public class Card extends Component implements HasComponents {
      */
     public Card() {
         content.setClassName("card-content");
-        action.setClassName("card-action");
+        action.setClassName("card-actions");
 
         this.add(content, action);
     }
