@@ -6,4 +6,4 @@ build:
 
   script:
     - mvn com.github.eirslett:frontend-maven-plugin:1.7.6:install-node-and-npm -DnodeVersion="v11.6.0"
-    - mvn clean package sonar:sonar -Dsonar.projectKey=AirbornePanda_vchelper  -Dsonar.organization=airbornepanda -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN
+    - mvn clean install sonar:sonar -Dsonar.projectKey=AirbornePanda_vchelper  -Dsonar.organization=airbornepanda -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN
