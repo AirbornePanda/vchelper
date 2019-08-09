@@ -4,7 +4,7 @@ build:
   before_script:
     - yum install which -y
     - yum install -y oracle-nodejs-release-el7 oracle-release-el7
-    - yum install nodejs
+    - yum install nodejs -y
 
   script:
     - mvn clean install sonar:sonar -Dsonar.projectKey=AirbornePanda_vchelper  -Dsonar.organization=airbornepanda -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_LOGIN
