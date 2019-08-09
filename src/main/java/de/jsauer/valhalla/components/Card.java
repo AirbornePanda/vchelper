@@ -10,6 +10,7 @@ import com.vaadin.flow.component.dependency.NpmPackage;
 import com.vaadin.flow.component.html.Div;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * API implementation for the polymer paper card.
@@ -42,6 +43,9 @@ public class Card extends Component implements HasComponents {
      */
     private static final PropertyDescriptor<Integer, Integer> ELEVATION =
             PropertyDescriptors.propertyWithDefault("elevation", 0);
+
+    private static final PropertyDescriptor<String, String> IMAGE =
+            PropertyDescriptors.propertyWithDefault("image", "");
 
     /**
      * Basic constructor.
@@ -126,5 +130,29 @@ public class Card extends Component implements HasComponents {
      */
     public void removeAction(@NotNull final Component... components) {
         action.remove(components);
+    }
+
+    /**
+     * Set the image location for the card header.
+     * @param imagePath the location of the image
+     */
+    public void setImage(final String imagePath) {
+        set(IMAGE, Objects.requireNonNullElse(imagePath, ""));
+
+    }
+
+    /**
+     * Get the image location of the card header
+     * @return the location of the image
+     */
+    public String getImage() {
+        return get(IMAGE);
+    }
+
+    /**
+     * Remove the image of the header.
+     */
+    public void removeImage() {
+        setImage("");
     }
 }
