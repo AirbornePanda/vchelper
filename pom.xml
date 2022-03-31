@@ -24,7 +24,7 @@
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
         <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
         <spring-test.version>5.1.8.RELEASE</spring-test.version>
-        <spring-security.version>5.1.5.RELEASE</spring-security.version>
+        <spring-security.version>5.3.18</spring-security.version>
         <vaadin.version>14.0.0.rc9</vaadin.version>
     </properties>
 
